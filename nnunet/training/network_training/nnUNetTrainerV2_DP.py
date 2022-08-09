@@ -32,7 +32,7 @@ from torch.nn.parallel.data_parallel import DataParallel
 
 class nnUNetTrainerV2_DP(nnUNetTrainerV2):
     def __init__(self, plans_file, fold, output_folder=None, dataset_directory=None, batch_dice=True, stage=None,
-                 unpack_data=True, deterministic=True, num_gpus=1, distribute_batch_size=False, fp16=False):
+                 unpack_data=True, deterministic=True, num_gpus=1, distribute_batch_size=False, fp16=False, max_num_epochs =1000):
         super(nnUNetTrainerV2_DP, self).__init__(plans_file, fold, output_folder, dataset_directory, batch_dice, stage,
                                                 unpack_data, deterministic, fp16)
         self.init_args = (plans_file, fold, output_folder, dataset_directory, batch_dice, stage, unpack_data,
