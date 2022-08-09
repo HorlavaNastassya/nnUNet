@@ -93,6 +93,9 @@ def main():
     parser.add_argument('-max_num_epochs', type=int, required=False, default=1000,
                         help='maximum number of epochs')
 
+    parser.add_argument('-save_every', type=int, required=False, default=50,
+                        help='how often to save model in epochs, 50 by defaults ')
+
     args = parser.parse_args()
 
     task = args.task
@@ -113,6 +116,7 @@ def main():
     fp32 = args.fp32
     run_mixed_precision = not fp32
     max_num_epochs = args.max_num_epochs
+    save_every = args.save_every
 
     val_folder = args.val_folder
     # interp_order = args.interp_order
@@ -155,7 +159,7 @@ def main():
     trainer = trainer_class(plans_file, fold, output_folder=output_folder_name, dataset_directory=dataset_directory,
                             batch_dice=batch_dice, stage=stage, unpack_data=decompress_data,
                             deterministic=deterministic,
-                            fp16=run_mixed_precision, max_num_epochs= max_num_epochs)
+                            fp16=run_mixed_precision, max_num_epochs= max_num_epochs, save_every = save_every)
     if args.disable_saving:
         trainer.save_final_checkpoint = False # whether or not to save the final checkpoint
         trainer.save_best_checkpoint = False  # whether or not to save the best checkpoint according to
